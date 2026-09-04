@@ -1,0 +1,190 @@
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+  <div class="container hero-grid">
+    <div class="hero-text-content">
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span>Full Stack Developer &#64; <strong>Virtual Employee Pvt Ltd</strong> (TK12691)</span>
+      </div>
+
+      <h1 class="hero-title">
+        Hi, I'm <span class="gradient-text">Arijit Mondal</span>
+      </h1>
+
+      <div class="hero-typewriter-wrapper">
+        <span style="color:var(--text-dim); font-size:1.2rem;">&gt;</span>
+        <span>{{ typewriterText() }}</span>
+        <span class="cursor-blink"></span>
+      </div>
+
+      <p class="hero-bio">
+        AI/ML Engineer & Full-Stack Developer specializing in <strong>Agentic AI workflows</strong>, <strong>RAG knowledge grounding</strong>, <strong>Computer Vision/OCR</strong>, and scalable FastAPI & Angular architectures. Building the bridge between probabilistic AI models and deterministic enterprise software.
+      </p>
+
+      <div class="hero-actions">
+        <a routerLink="/projects" class="btn btn-primary">
+          <i class="fa-solid fa-rocket"></i> Explore Live Projects
+        </a>
+        <button (click)="openCvModal()" class="btn btn-secondary">
+          <i class="fa-solid fa-file-pdf"></i> Download CV / Resume
+        </button>
+      </div>
+
+      <div class="hero-socials">
+        <a href="https://github.com/ArijitMondalVE" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="GitHub (Work Repos)">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://github.com/arijit477" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="GitHub (GenAI Repos)">
+          <i class="fa-brands fa-github-alt"></i>
+        </a>
+        <a routerLink="/contact" class="social-icon-btn" title="Direct Contact">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a routerLink="/terminal" class="social-icon-btn" title="Interactive AI Terminal">
+          <i class="fa-solid fa-terminal"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hologram-card">
+        <div class="hologram-corner corner-tl"></div>
+        <div class="hologram-corner corner-tr"></div>
+        <div class="hologram-corner corner-bl"></div>
+        <div class="hologram-corner corner-br"></div>
+
+        <div class="hologram-inner">
+          <img src="assets/profile.jpg" alt="Arijit Mondal" class="profile-img">
+
+          <div class="hologram-badge">
+            <div class="hologram-badge-info">
+              <h4>Arijit Mondal</h4>
+              <span>AI/ML • Full-Stack</span>
+            </div>
+            <div style="color:var(--cyan-primary); font-size:1.2rem;">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="floating-chip chip-1">
+          <i class="fa-solid fa-brain"></i> 9-Agent Pipeline
+        </div>
+        <div class="floating-chip chip-2">
+          <i class="fa-solid fa-cubes"></i> Three.js & FastAPI
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Counter Banner -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card glass-panel">
+        <div class="stat-number gradient-text">6+ Mos</div>
+        <div class="stat-label">AI/ML Work & Experience</div>
+      </div>
+      <div class="stat-card glass-panel">
+        <div class="stat-number gradient-text-cyan">9 Agents</div>
+        <div class="stat-label">Flagship Orchestration</div>
+      </div>
+      <div class="stat-card glass-panel">
+        <div class="stat-number gradient-text-emerald">7+ Apps</div>
+        <div class="stat-label">Production & Architecture Systems</div>
+      </div>
+      <div class="stat-card glass-panel">
+        <div class="stat-number gradient-text">4 Live</div>
+        <div class="stat-label">Deployed Web Applications</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     Current Running / Live Projects Section on Home Page
+     ========================================================================== -->
+<section class="home-running-projects-section page-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <i class="fa-solid fa-satellite-dish"></i> Active Cloud Deployments
+      </div>
+      <h2 class="section-title">
+        Current <span class="gradient-text">Running & Live</span> Projects
+      </h2>
+      <p class="section-desc">
+        Explore production-grade AI applications currently running live in the cloud — featuring autonomous multi-agent pipelines, RAG vector retrieval, and low-latency full-stack backends.
+      </p>
+    </div>
+
+    <!-- Running Projects Grid -->
+    <div class="projects-grid">
+      <div *ngFor="let project of runningProjects()" class="project-card glass-panel" [class.featured-card]="project.featured">
+        <div class="project-top">
+          <div class="project-badges">
+            <span class="badge-tag badge-flagship">{{ project.badge }}</span>
+            <span class="badge-tag badge-domain">{{ project.domain }}</span>
+            <span *ngIf="project.liveUrl" class="badge-tag badge-live">
+              <span class="live-dot-pulse"></span> Running Live
+            </span>
+          </div>
+        </div>
+
+        <h3 class="project-title">{{ project.title }}</h3>
+        <div class="project-subtitle">{{ project.subtitle }}</div>
+        <p class="project-summary">{{ project.summary }}</p>
+
+        <!-- Highlight Stats -->
+        <div *ngIf="project.highlightStats && project.highlightStats.length" class="project-metrics-row">
+          <div *ngFor="let stat of project.highlightStats" class="metric-item">
+            <span class="metric-val">{{ stat.val }}</span>
+            <span class="metric-lbl">{{ stat.label }}</span>
+          </div>
+        </div>
+
+        <!-- Tech Stack Pills -->
+        <div class="tech-pills-list">
+          <span *ngFor="let tech of project.techStack.slice(0, 6)" class="tech-pill">{{ tech }}</span>
+          <span *ngIf="project.techStack.length > 6" class="tech-pill">+{{ project.techStack.length - 6 }} more</span>
+        </div>
+
+        <!-- Card Footer Actions -->
+        <div class="project-card-footer">
+          <button (click)="openProjectModal(project)" class="btn btn-sm btn-secondary">
+            <i class="fa-solid fa-diagram-project"></i> Deep Dive
+          </button>
+          <div class="project-btn-group">
+            <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" title="View Source Code">
+              <i class="fa-brands fa-github"></i> Code
+            </a>
+            <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary" title="Launch Running Application">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live App
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA Bar -->
+    <div class="home-projects-cta-bar glass-panel" style="margin-top: 50px; padding: 32px 36px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; border: 1px solid rgba(0,240,255,0.25);">
+      <div>
+        <h4 style="font-size: 1.35rem; color: #fff; margin-bottom: 6px;">
+          Want to explore all architecture repositories & microservices?
+        </h4>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">
+          Inspect enterprise Spring Boot architectures, Keycloak OAuth 2.0 systems, and Android SIH applications.
+        </p>
+      </div>
+      <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+        <a routerLink="/projects" class="btn btn-secondary">
+          <i class="fa-solid fa-cloud"></i> All Deployed Apps
+        </a>
+        <a routerLink="/more-projects" class="btn btn-primary">
+          <i class="fa-solid fa-code-branch"></i> More Projects & Repos
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

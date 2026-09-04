@@ -1,0 +1,67 @@
+<section class="projects-section more-projects-section page-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <i class="fa-solid fa-code-branch"></i> System Architectures & Repositories
+      </div>
+      <h2 class="section-title">
+        More <span class="gradient-text">Engineering</span> Projects
+      </h2>
+      <p class="section-desc">
+        Enterprise microservices, event-driven WebSocket architectures, hackathon-recognized native apps, and relational database systems.
+      </p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="project-filter-tabs">
+      <button class="filter-btn" [class.active]="activeCategory() === 'all'" (click)="loadProjects('all')">All Other Projects (3)</button>
+      <button class="filter-btn" [class.active]="activeCategory() === 'fullstack'" (click)="loadProjects('fullstack')">Enterprise & Full-Stack</button>
+      <button class="filter-btn" [class.active]="activeCategory() === 'mobile'" (click)="loadProjects('mobile')">Mobile & Hackathon</button>
+    </div>
+
+    <!-- Other Projects Grid -->
+    <div class="projects-grid">
+      <div *ngFor="let project of otherProjects()" class="project-card glass-panel">
+        <div class="project-top">
+          <div class="project-badges">
+            <span class="badge-tag badge-flagship">{{ project.badge }}</span>
+            <span class="badge-tag badge-domain">{{ project.domain }}</span>
+            <span class="badge-tag badge-repo">
+              <i class="fa-brands fa-github"></i> Architecture
+            </span>
+          </div>
+        </div>
+
+        <h3 class="project-title">{{ project.title }}</h3>
+        <div class="project-subtitle">{{ project.subtitle }}</div>
+        <p class="project-summary">{{ project.summary }}</p>
+
+        <!-- Metrics Row -->
+        <div *ngIf="project.highlightStats && project.highlightStats.length" class="project-metrics-row">
+          <div *ngFor="let stat of project.highlightStats" class="metric-item">
+            <span class="metric-val">{{ stat.val }}</span>
+            <span class="metric-lbl">{{ stat.label }}</span>
+          </div>
+        </div>
+
+        <!-- Tech Stack Pills -->
+        <div class="tech-pills-list">
+          <span *ngFor="let tech of project.techStack.slice(0, 6)" class="tech-pill">{{ tech }}</span>
+          <span *ngIf="project.techStack.length > 6" class="tech-pill">+{{ project.techStack.length - 6 }} more</span>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="project-card-footer">
+          <button (click)="openProjectModal(project)" class="btn btn-sm btn-secondary">
+            <i class="fa-solid fa-diagram-project"></i> Deep Dive
+          </button>
+          <div class="project-btn-group">
+            <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" title="View Source Code">
+              <i class="fa-brands fa-github"></i> View Repo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

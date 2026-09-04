@@ -1,0 +1,280 @@
+<!-- Three.js 3D Neural Universe Canvas -->
+<app-three-background></app-three-background>
+
+<!-- Background Grid & Noise Overlay -->
+<div class="cyber-grid-overlay"></div>
+<div class="noise-overlay"></div>
+
+<!-- ==========================================================================
+     Navigation Bar
+     ========================================================================== -->
+<nav class="navbar">
+  <div class="container nav-container">
+    <a routerLink="/home" class="nav-logo" (click)="closeMobileNav()">
+      <span class="logo-symbol">AM</span>
+      <span>Arijit<span style="color:var(--cyan-primary);">.ai</span></span>
+    </a>
+
+    <ul class="nav-links" [class.mobile-open]="isMobileNavOpen()">
+      <li><a routerLink="/home" routerLinkActive="active" (click)="closeMobileNav()" class="nav-link">Home</a></li>
+      <li><a routerLink="/projects" routerLinkActive="active" (click)="closeMobileNav()" class="nav-link">Live Projects</a></li>
+      <li><a routerLink="/more-projects" routerLinkActive="active" (click)="closeMobileNav()" class="nav-link">More Projects</a></li>
+      <li><a routerLink="/skills" routerLinkActive="active" (click)="closeMobileNav()" class="nav-link">Skills & Stack</a></li>
+      <li><a routerLink="/experience" routerLinkActive="active" (click)="closeMobileNav()" class="nav-link">Experience</a></li>
+      <li><a routerLink="/terminal" routerLinkActive="active" (click)="closeMobileNav()" class="nav-link">AI Screening</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMobileNav()" class="nav-link">Contact</a></li>
+    </ul>
+
+    <div class="nav-cta-group">
+      <button (click)="openCvModal()" class="btn btn-sm btn-secondary" title="View Full CV">
+        <i class="fa-solid fa-file-lines"></i> View CV
+      </button>
+      <a routerLink="/contact" class="btn btn-sm btn-primary">
+        <i class="fa-solid fa-paper-plane"></i> Let's Talk
+      </a>
+    </div>
+
+    <button class="nav-toggle" (click)="toggleMobileNav()" aria-label="Toggle Navigation Menu">
+      <i class="fa-solid" [ngClass]="isMobileNavOpen() ? 'fa-xmark' : 'fa-bars'"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- ==========================================================================
+     Main Routed Page Outlet
+     ========================================================================== -->
+<main class="main-routed-content">
+  <router-outlet></router-outlet>
+</main>
+
+<!-- ==========================================================================
+     Footer
+     ========================================================================== -->
+<footer class="footer">
+  <div class="container footer-content">
+    <div class="nav-logo" style="font-size:1.15rem;">
+      <span class="logo-symbol" style="width:30px; height:30px; font-size:0.85rem;">AM</span>
+      <span>Arijit<span style="color:var(--cyan-primary);">.ai</span></span>
+    </div>
+
+    <div class="footer-links">
+      <a routerLink="/home">Home</a>
+      <a routerLink="/projects">Live Projects</a>
+      <a routerLink="/more-projects">More Projects</a>
+      <a routerLink="/skills">Skills & Stack</a>
+      <a routerLink="/experience">Experience</a>
+      <a routerLink="/terminal">AI Screening</a>
+      <a routerLink="/contact">Contact</a>
+    </div>
+
+    <div class="footer-copy">
+      Crafted with <i class="fa-solid fa-heart" style="color:var(--magenta-primary);"></i> using Angular 19, TypeScript & Three.js 3D.
+    </div>
+  </div>
+</footer>
+
+<!-- ==========================================================================
+     Modal 1: Project Architecture Deep Dive
+     ========================================================================== -->
+<div *ngIf="portfolioService.selectedProject() as project" class="modal-overlay active" (click)="closeProjectModal()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.domain }} • {{ project.badge }}</p>
+      </div>
+      <button (click)="closeProjectModal()" class="modal-close-btn" aria-label="Close Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <!-- Full Tech Stack -->
+      <div style="margin-bottom: 24px;">
+        <h4 style="color:#fff; font-size:1.15rem; margin-bottom:12px;">Full Tech Stack</h4>
+        <div class="tech-pills-list">
+          <span *ngFor="let t of project.techStack" class="tech-pill" style="border-color:rgba(0,240,255,0.3); color:#fff;">{{ t }}</span>
+        </div>
+      </div>
+
+      <!-- Pipeline Tree -->
+      <div *ngIf="project.pipelineSteps && project.pipelineSteps.length" style="margin-bottom: 24px;">
+        <h4 style="color:#fff; font-size:1.15rem; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+          <i class="fa-solid fa-network-wired" style="color:var(--cyan-primary);"></i> Execution Pipeline Architecture
+        </h4>
+        <div class="pipeline-tree">
+          <div *ngFor="let st of project.pipelineSteps" class="pipeline-node">
+            <div class="node-number">{{ st.step }}</div>
+            <div class="node-content">
+              <h5>{{ st.title }}</h5>
+              <p>{{ st.desc }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div style="margin-bottom: 24px;">
+        <h4 style="color:#fff; font-size:1.15rem; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+          <i class="fa-solid fa-list-check" style="color:var(--emerald-primary);"></i> Core Engineering Features
+        </h4>
+        <ul style="list-style:none; padding-left:0; display:flex; flex-direction:column; gap:8px;">
+          <li *ngFor="let f of project.features" style="font-size:0.9rem; color:#cbd5e1; position:relative; padding-left:22px;">
+            <i class="fa-solid fa-check" style="position:absolute; left:0; top:4px; color:var(--emerald-primary); font-size:0.8rem;"></i>
+            {{ f }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Challenges -->
+      <div *ngIf="project.challenges && project.challenges.length" style="margin-bottom: 24px;">
+        <h4 style="color:#fff; font-size:1.15rem; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+          <i class="fa-solid fa-bolt" style="color:#f87171;"></i> Key Engineering Challenges & Solutions
+        </h4>
+        <div class="challenges-grid">
+          <div *ngFor="let ch of project.challenges" class="challenge-box">
+            <h6><i class="fa-solid fa-triangle-exclamation"></i> Challenge: {{ ch.challenge }}</h6>
+            <p><strong>Solution:</strong> {{ ch.solution }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Takeaway -->
+      <div *ngIf="project.interviewTakeaway" style="background:rgba(0,240,255,0.06); border:1px solid rgba(0,240,255,0.25); border-radius:var(--radius-md); padding:16px;">
+        <h5 style="color:var(--cyan-primary); font-size:0.95rem; margin-bottom:6px;">
+          <i class="fa-solid fa-lightbulb"></i> Key Architectural Lesson
+        </h5>
+        <p style="color:#cbd5e1; font-size:0.88rem; line-height:1.6; margin:0;">{{ project.interviewTakeaway }}</p>
+      </div>
+
+      <!-- Modal Footer -->
+      <div style="margin-top:24px; padding-top:18px; border-top:1px solid var(--border-subtle); display:flex; gap:12px; justify-content:flex-end;">
+        <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">
+          <i class="fa-brands fa-github"></i> View GitHub Repo
+        </a>
+        <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live Application
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     Modal 2: Complete Interactive CV / Resume Viewer
+     ========================================================================== -->
+<div *ngIf="portfolioService.isCvModalOpen()" class="modal-overlay cv-viewer-modal active" (click)="closeCvModal()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <h3>Curriculum Vitae (CV)</h3>
+        <p>Arijit Mondal • Full Stack Developer & AI/ML Specialist (TK12691)</p>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <button (click)="printCv()" class="btn btn-sm btn-primary">
+          <i class="fa-solid fa-print"></i> Print / Save PDF
+        </button>
+        <button (click)="closeCvModal()" class="modal-close-btn" aria-label="Close Modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+    <div class="modal-body" style="background:#f1f5f9;">
+      <div class="cv-document-layout">
+        <div class="cv-doc-header">
+          <div>
+            <h2>Arijit Mondal</h2>
+            <div class="cv-sub">Full Stack Developer | AI & ML Specialist</div>
+            <div style="font-size:0.88rem; color:#64748b; margin-top:4px;">
+              Virtual Employee Pvt Ltd • Employee ID: TK12691
+            </div>
+          </div>
+          <div style="text-align:right; font-size:0.85rem; color:#64748b;">
+            <div>GitHub: github.com/ArijitMondalVE</div>
+            <div>Secondary: github.com/arijit477</div>
+          </div>
+        </div>
+
+        <div class="cv-doc-section">
+          <h4>Professional Summary</h4>
+          <p>
+            Aspiring Computer Science Professional specializing in AI & ML with strong full-stack development expertise. Hands-on experience in building scalable, responsive web and mobile applications using React, Angular, Next.js, and Spring Boot. Proficient in designing RESTful APIs, implementing secure authentication (Keycloak, JWT), and integrating real-time communication systems (WebSockets). Passionate about clean code architecture, performance optimization, and building user-centric digital solutions.
+          </p>
+        </div>
+
+        <div class="cv-doc-section">
+          <h4>Technical Skills</h4>
+          <ul style="padding-left:18px;">
+            <li><strong>Frontend Technologies:</strong> React.js, Angular 17-19, Next.js, HTML5, CSS3, SCSS, JavaScript, TypeScript, Bootstrap, Tailwind CSS, Material UI, XML, Jetpack Compose</li>
+            <li><strong>Backend Technologies:</strong> Python, FastAPI, Java, Spring Boot, Node.js</li>
+            <li><strong>AI & ML Technologies:</strong> LangChain, LangGraph, GPT-4o, Claude Sonnet, Google Gemini 2.5 Flash, ChromaDB, EasyOCR, PaddleOCR, OpenCV, OpenAI Whisper STT/TTS</li>
+            <li><strong>Database & Cloud:</strong> MySQL, MongoDB, PostgreSQL, NeonDB, Firebase (Authentication & Realtime Database), AWS, Render, Vercel</li>
+            <li><strong>Tools & Protocols:</strong> REST APIs, WebSockets, Keycloak (OAuth 2.0), MCP Servers, CI/CD, Celery, Redis, Docker Compose, Git & GitHub</li>
+          </ul>
+        </div>
+
+        <div class="cv-doc-section">
+          <h4>Major Projects</h4>
+          <div style="margin-bottom:16px;">
+            <strong style="color:#0f172a; font-size:1rem;">1. HomeworkPlus — AI-Powered Homework Assistance Platform</strong>
+            <p style="font-size:0.85rem; color:#0284c7; margin:2px 0 4px;">FastAPI, Python 3.12, LangChain/LangGraph, GPT-4o, Claude, ChromaDB, EasyOCR/PaddleOCR, OpenCV, Whisper, Angular 19, Celery, Redis, Docker</p>
+            <ul style="padding-left:18px; font-size:0.88rem;">
+              <li>Architected a 9-agent AI pipeline (vision, OCR, math, tutor, RAG, voice, translation, recommendation, progress agents) orchestrated with LangChain/LangGraph.</li>
+              <li>Built a RAG knowledge base on ChromaDB to ground LLM responses in retrieved course content and reduce hallucination.</li>
+              <li>Implemented OCR + computer vision preprocessing with PII detection and math/LaTeX recognition.</li>
+              <li>Added voice interaction (Whisper STT/TTS), real-time whiteboard/chat via WebSockets, and gamified XP/leaderboard system.</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <strong style="color:#0f172a; font-size:1rem;">2. RFP Agent — AI-Assisted RFP Analysis Workflow</strong>
+            <p style="font-size:0.85rem; color:#0284c7; margin:2px 0 4px;">Angular, Python, FastAPI, Specialized Agent Layer, ChromaDB, Document Chunk Store</p>
+            <ul style="padding-left:18px; font-size:0.88rem;">
+              <li>Decomposed RFP tender analysis into specialized autonomous agents for compliance, contracts, deadlines, disqualifiers, evaluation, scope, and staffing.</li>
+              <li>Implemented ChromaDB-based chunk retrieval for 100+ page tender documentation.</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <strong style="color:#0f172a; font-size:1rem;">3. AI Yoga Coach — Conversational AI Fitness Coach</strong>
+            <p style="font-size:0.85rem; color:#0284c7; margin:2px 0 4px;">React, TypeScript, Vite, FastAPI, Google Gemini 2.5 Flash, Pydantic</p>
+            <ul style="padding-left:18px; font-size:0.88rem;">
+              <li>Built an LLM-powered coaching experience with persona selection (calm vs energetic) and exercise context injection.</li>
+              <li>Engineered safety-oriented prompt guardrails for pain/injury scenarios.</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <strong style="color:#0f172a; font-size:1rem;">4. AI Insurance Portal</strong>
+            <p style="font-size:0.85rem; color:#0284c7; margin:2px 0 4px;">Angular 17 (Signals, Zoneless), FastAPI, OpenAI GPT-4o-mini, SQL, JWT</p>
+            <ul style="padding-left:18px; font-size:0.88rem;">
+              <li>Built a conversational insurance customer portal grounded over a SQL-backed knowledge base with secure JWT authentication.</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <strong style="color:#0f172a; font-size:1rem;">5. Real-Time Chat Application</strong>
+            <p style="font-size:0.85rem; color:#0284c7; margin:2px 0 4px;">Angular 19, Spring Boot, MySQL, WebSocket, Keycloak (OAuth 2.0)</p>
+            <ul style="padding-left:18px; font-size:0.88rem;">
+              <li>Engineered instant messaging platform with WebSocket STOMP protocol and enterprise Keycloak identity management.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-doc-section">
+          <h4>Education</h4>
+          <p><strong>Bachelor of Technology (B.Tech) in Computer Science & Technology (AI & ML)</strong></p>
+          <p style="color:#64748b;">MCKV Institute of Engineering, Howrah</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div *ngIf="portfolioService.toast() as msg" class="toast-container">
+  <div class="toast show">
+    <i class="fa-solid fa-circle-check" style="color:var(--cyan-primary);"></i>
+    <span>{{ msg }}</span>
+  </div>
+</div>

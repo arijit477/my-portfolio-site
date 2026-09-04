@@ -1,0 +1,104 @@
+<section class="contact-section page-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <i class="fa-solid fa-paper-plane"></i> Get In Touch
+      </div>
+      <h2 class="section-title">
+        Let's Build Something <span class="gradient-text">Exceptional</span>
+      </h2>
+      <p class="section-desc">
+        Whether you have an AI engineering inquiry, full-stack architecture opportunity, or simply want to connect — my inbox is always open.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info-card glass-panel">
+        <div>
+          <h3 style="font-size:1.6rem; color:#fff; margin-bottom:12px;">Contact Coordinates</h3>
+          <p style="color:var(--text-muted); font-size:0.95rem;">
+            Currently based in India, open for high-impact AI/ML engineering, multi-agent system design, and full-stack innovation roles.
+          </p>
+
+          <div class="contact-direct-list">
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <i class="fa-solid fa-building"></i>
+              </div>
+              <div class="contact-item-text">
+                <span>Current Company</span>
+                <p>Virtual Employee Pvt Ltd</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <i class="fa-brands fa-github"></i>
+              </div>
+              <div class="contact-item-text">
+                <span>GitHub Profiles</span>
+                <p>
+                  <a href="https://github.com/ArijitMondalVE" target="_blank" rel="noopener noreferrer">ArijitMondalVE</a> / 
+                  <a href="https://github.com/arijit477" target="_blank" rel="noopener noreferrer">arijit477</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <div class="contact-item-text">
+                <span>Education</span>
+                <p>B.Tech CST (AI & ML), MCKV</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <i class="fa-solid fa-id-badge"></i>
+              </div>
+              <div class="contact-item-text">
+                <span>Employee ID</span>
+                <p>TK12691</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:16px; background:rgba(0,240,255,0.06); border:1px solid rgba(0,240,255,0.2); border-radius:var(--radius-md);">
+          <span style="color:var(--cyan-primary); font-size:0.85rem; font-family:var(--font-mono); font-weight:600;">
+            <i class="fa-solid fa-bolt"></i> Availability Status:
+          </span>
+          <p style="color:#cbd5e1; font-size:0.88rem; margin-top:4px;">
+            Active on enterprise AI pipelines & cutting-edge WebGL interfaces.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-form-card glass-panel">
+        <form (ngSubmit)="submitContact()">
+          <div class="form-group">
+            <label for="sender-name" class="form-label">Your Name</label>
+            <input type="text" id="sender-name" [(ngModel)]="contactData.name" name="name" class="form-input" placeholder="e.g. Hiring Team / Collaborator" required>
+          </div>
+
+          <div class="form-group">
+            <label for="sender-email" class="form-label">Email Address</label>
+            <input type="email" id="sender-email" [(ngModel)]="contactData.email" name="email" class="form-input" placeholder="e.g. recruiter&#64;company.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="sender-msg" class="form-label">Message / Project Inquiry</label>
+            <textarea id="sender-msg" [(ngModel)]="contactData.message" name="message" class="form-textarea" placeholder="Describe your team opportunity, project, or discussion topic..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" [disabled]="isSubmitting()" style="width:100%;">
+            <i class="fa-solid" [ngClass]="isSubmitting() ? 'fa-spinner fa-spin' : 'fa-paper-plane'"></i>
+            {{ isSubmitting() ? 'Transmitting via FastAPI...' : 'Send Direct Message' }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

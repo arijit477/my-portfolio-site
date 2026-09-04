@@ -1,0 +1,71 @@
+<section class="projects-section page-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <i class="fa-solid fa-cloud-arrow-up"></i> Live Cloud Deployments
+      </div>
+      <h2 class="section-title">
+        Featured <span class="gradient-text">Deployed</span> Applications
+      </h2>
+      <p class="section-desc">
+        Production applications deployed live with multimodal agentic pipelines, RAG vector retrieval, and responsive full-stack architectures.
+      </p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="project-filter-tabs">
+      <button class="filter-btn" [class.active]="activeCategory() === 'all'" (click)="loadProjects('all')">All Deployed (4)</button>
+      <button class="filter-btn" [class.active]="activeCategory() === 'agentic'" (click)="loadProjects('agentic')">Agentic AI & RAG</button>
+      <button class="filter-btn" [class.active]="activeCategory() === 'genai'" (click)="loadProjects('genai')">Conversational GenAI</button>
+      <button class="filter-btn" [class.active]="activeCategory() === 'fullstack'" (click)="loadProjects('fullstack')">Full-Stack & Cloud</button>
+    </div>
+
+    <!-- Deployed Projects Grid -->
+    <div class="projects-grid">
+      <div *ngFor="let project of deployedProjects()" class="project-card glass-panel" [class.featured-card]="project.featured">
+        <div class="project-top">
+          <div class="project-badges">
+            <span class="badge-tag badge-flagship">{{ project.badge }}</span>
+            <span class="badge-tag badge-domain">{{ project.domain }}</span>
+            <span *ngIf="project.liveUrl" class="badge-tag badge-live">
+              <span class="live-dot-pulse"></span> Live Demo
+            </span>
+          </div>
+        </div>
+
+        <h3 class="project-title">{{ project.title }}</h3>
+        <div class="project-subtitle">{{ project.subtitle }}</div>
+        <p class="project-summary">{{ project.summary }}</p>
+
+        <!-- Metrics Row -->
+        <div *ngIf="project.highlightStats && project.highlightStats.length" class="project-metrics-row">
+          <div *ngFor="let stat of project.highlightStats" class="metric-item">
+            <span class="metric-val">{{ stat.val }}</span>
+            <span class="metric-lbl">{{ stat.label }}</span>
+          </div>
+        </div>
+
+        <!-- Tech Stack Pills -->
+        <div class="tech-pills-list">
+          <span *ngFor="let tech of project.techStack.slice(0, 6)" class="tech-pill">{{ tech }}</span>
+          <span *ngIf="project.techStack.length > 6" class="tech-pill">+{{ project.techStack.length - 6 }} more</span>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="project-card-footer">
+          <button (click)="openProjectModal(project)" class="btn btn-sm btn-secondary">
+            <i class="fa-solid fa-diagram-project"></i> Deep Dive
+          </button>
+          <div class="project-btn-group">
+            <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" title="View Source Code">
+              <i class="fa-brands fa-github"></i> Code
+            </a>
+            <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary" title="Launch Live Web App">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Live App
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

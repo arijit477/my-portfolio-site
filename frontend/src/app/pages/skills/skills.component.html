@@ -1,0 +1,40 @@
+<section class="skills-section page-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <i class="fa-solid fa-microchip"></i> Technical Capabilities
+      </div>
+      <h2 class="section-title">
+        Skills & <span class="gradient-text">Technology Stack</span>
+      </h2>
+      <p class="section-desc">
+        Comprehensive toolkit across AI engineering, asynchronous distributed architectures, real-time communication protocols, and interactive modern frontend frameworks.
+      </p>
+    </div>
+
+    <div class="skills-category-grid">
+      <div *ngFor="let cat of skillCategories" class="skill-category-card glass-panel">
+        <div class="skill-category-header">
+          <div class="skill-cat-icon" [style.color]="cat.color" [style.border]="'1px solid ' + cat.color + '40'">
+            <i class="fa-solid" [ngClass]="cat.icon"></i>
+          </div>
+          <div>
+            <h4 style="font-size:1.15rem; color:#fff;">{{ cat.name }}</h4>
+            <span style="font-size:0.75rem; color:var(--text-dim); font-family:var(--font-mono);">{{ cat.skills.length }} core proficiencies</span>
+          </div>
+        </div>
+        <div class="skill-items-list">
+          <div *ngFor="let s of cat.skills" class="skill-item">
+            <div class="skill-item-header">
+              <span class="skill-name">{{ s.name }}</span>
+              <span class="skill-tag-pill">{{ s.tag }}</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" [style.width]="s.level + '%'" [style.background]="'linear-gradient(90deg, ' + cat.color + '88, ' + cat.color + ')'"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
