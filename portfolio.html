@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Portfolio | Abhijit Das</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0f16;
+            --text-color: #e2e8f0;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .shape {
+            position: absolute;
+            filter: blur(100px);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 20s infinite linear alternate;
+        }
+        .shape-1 {
+            top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--accent-primary);
+        }
+        .shape-2 {
+            bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: var(--accent-secondary); animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100px, 50px) rotate(45deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(10, 15, 22, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        nav .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Containers */
+        section {
+            padding: 6rem 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(to right, #fff, var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Home Section */
+        #home {
+            flex-direction: row;
+            align-items: center;
+            gap: 4rem;
+            padding-top: 8rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .hero-bio {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            border: 4px solid var(--glass-border);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Glass Cards for Generic Sections */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .glass-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        /* Timeline / Monthly Progress */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--glass-border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            border: 4px solid var(--bg-color);
+            box-shadow: 0 0 10px var(--accent-primary);
+        }
+
+        .timeline-content {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-date {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--accent-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-tech {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .timeline-tech span {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <nav>
+        <div class="logo">Abhijit Das.</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#client-engagements">Client Engagements</a></li>
+            <li><a href="#monthly-progress">Monthly Progress</a></li>
+            <li><a href="#applied-builds">Applied Builds</a></li>
+            <li><a href="#pocs">Proof of Concepts</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Executive Portfolio</h1>
+            <div class="hero-subtitle">Data Engineering, AI, and Cloud Architecture</div>
+            <p class="hero-bio">
+                I am Abhijit Das, a passionate engineer specializing in cutting-edge AI architectures, Data Engineering, and modern web application development. I architect scalable cloud solutions and integrate LLMs to build intelligent automation tools and robust digital experiences.
+            </p>
+            <div class="skills-container">
+                <div class="skill-tag">Data Engineering</div>
+                <div class="skill-tag">Artificial Intelligence (LLMs)</div>
+                <div class="skill-tag">Cloud Architecture</div>
+                <div class="skill-tag">Python & FastAPI</div>
+                <div class="skill-tag">Angular & React</div>
+                <div class="skill-tag">Computer Vision</div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <!-- Placeholder for user's image -->
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Abhijit Das">
+        </div>
+    </section>
+
+    <!-- Client Engagements -->
+    <section id="client-engagements">
+        <div class="container">
+            <h2 class="section-title">Client Engagements</h2>
+            <div class="grid-container">
+                <div class="glass-card">
+                    <h3>Enterprise AI Solutions</h3>
+                    <p>Partnered with tier-1 enterprise clients to deliver robust AI-powered presales platforms, reducing manual documentation efforts and streamlining operations.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Insurance Portal Automation</h3>
+                    <p>Designed and built end-to-end automated claim processing architectures leveraging OCR, YOLO models, and GenAI for large-scale insurance providers.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Health & Wellness AI</h3>
+                    <p>Engineered an interactive AI Yoga Coach utilizing real-time computer vision and pose detection for advanced interactive fitness clients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Monthly Progress Timeline -->
+    <section id="monthly-progress">
+        <div class="container">
+            <h2 class="section-title">Monthly Progress</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">March</div>
+                        <p>Started learning the LLM Engineering course and built a strong foundation in AI automation tools. Also explored workflow automation for upcoming client integrations.</p>
+                        <div class="timeline-tech"><span>Tech Stack:</span> LangChain, LangGraph, Zapier, LLMs</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April</div>
+                        <p>Developed an AI-powered RFP management system to automate the analysis of Request for Proposal documents. Worked on both frontend and backend, implementing document processing, requirement extraction, response generation, and RAG-based knowledge retrieval.</p>
+                        <div class="timeline-tech"><span>Tech Stack:</span> Angular, FastAPI, Python, GenAI, RAG, ChromaDB, Vector Search</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">May</div>
+                        <p>Built a demo for a Client AI-powered homework assistance platform featuring Photo-to-Answer, AI tutoring, voice-based learning, collaborative whiteboard, and 3D visualization. Integrated complex OCR pipelines and real-time WebSockets.</p>
+                        <div class="timeline-tech"><span>Tech Stack:</span> Angular, FastAPI, GPT-4o, Claude Sonnet, LangChain, EasyOCR, OpenCV, Whisper, NeonDB PostgreSQL, Redis, Celery</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">June</div>
+                        <p>Started developing a demo for an AI Insurance Portal to automate claim processing workflows. Implemented document upload, OCR extraction, vehicle damage detection using computer vision, and GenAI-powered claim reporting APIs.</p>
+                        <div class="timeline-tech"><span>Tech Stack:</span> FastAPI, YOLO, Computer Vision, OCR, GenAI, REST APIs</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">July</div>
+                        <p>Focused on an internal presales project, developing the Admin Panel and robust authentication/authorization modules. Concurrently expanded the functionality of the AI Insurance Portal demo.</p>
+                        <div class="timeline-tech"><span>Tech Stack:</span> Authentication, RBAC, Admin APIs, Frontend Integration</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">August</div>
+                        <p>Designed and developed the initial working POC for an AI Yoga Coach. Built the interactive experience featuring real-time body landmark tracking, asana analysis, posture evaluation, and coach interface.</p>
+                        <div class="timeline-tech"><span>Tech Stack:</span> React, TypeScript, FastAPI, MediaPipe, AI Coaching</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">September</div>
+                        <p>Transitioned the POC into full-scale product development. Engineered the real-time pose detection rule engine, joint-angle calculations, landmark smoothing, and interactive voice-based AI avatars (Alice and Kevin).</p>
+                        <div class="timeline-tech"><span>Tech Stack:</span> React, TypeScript, FastAPI, MediaPipe, Supabase, Voice AI Integrations</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Applied Builds -->
+    <section id="applied-builds">
+        <div class="container">
+            <h2 class="section-title">Applied Builds</h2>
+            <div class="grid-container">
+                <div class="glass-card">
+                    <h3>AI RFP Management</h3>
+                    <p>A full-stack RAG system utilizing ChromaDB and embeddings to index massive RFP documents and autonomously generate tailored technical proposals.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>AI Homework Assistant</h3>
+                    <p>An interactive, multi-modal educational platform utilizing computer vision for document scanning, OCR, and GPT-4o for dynamic tutoring and gamified learning.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Smart Insurance Core</h3>
+                    <p>Automated cloud architecture streamlining insurance claims via object detection (YOLO), extracting damage data and providing automated GenAI settlement reports.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proof of Concepts -->
+    <section id="pocs">
+        <div class="container">
+            <h2 class="section-title">Proof of Concepts</h2>
+            <div class="grid-container">
+                <div class="glass-card">
+                    <h3>Yoga Pose Engine POC</h3>
+                    <p>Exploratory development using MediaPipe to accurately track joints in real-time in a web browser, validating the feasibility of AI-driven fitness corrections.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>AI Voice Avatars</h3>
+                    <p>Integration testing of real-time TTS and LLM chains to create responsive digital avatars (Alice and Kevin) capable of interacting natively during workouts.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>3D Collaborative Whiteboards</h3>
+                    <p>Prototyping multi-user WebSocket synchronization for remote educational collaboration, enabling real-time drawing and 3D model visualization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
