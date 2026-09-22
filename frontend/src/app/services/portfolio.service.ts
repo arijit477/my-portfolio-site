@@ -200,7 +200,7 @@ export class PortfolioService {
       category: "fullstack",
       featured: true,
       badge: "Full-Stack AI Domain App",
-      liveUrl: "https://ai-insurance-portal.vercel.app/login",
+      liveUrl: "https://ai-insurance-portal-nnlv.vercel.app/login",
       githubUrl: "https://github.com/arijit477/ai-insurance-portal",
       summary: "A secure, enterprise-structured full-stack insurance platform integrating OpenAI GPT-4o-mini conversational intelligence with zoneless reactive Angular 17 and FastAPI REST services.",
       highlightStats: [
