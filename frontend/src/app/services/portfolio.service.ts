@@ -153,6 +153,48 @@ export class PortfolioService {
       interviewTakeaway: "Agentic workflows excel over giant prompts because separating responsibilities makes each domain component testable, explainable, and individually upgradeable."
     },
     {
+      id: "presales-platform",
+      title: "Pre Sales Platform",
+      subtitle: "In-House Enterprise AI Scoping & Proposal Engine",
+      domain: "Enterprise / Pre-Sales Automation",
+      category: "agentic",
+      featured: true,
+      badge: "In-House Production AI",
+      liveUrl: "https://presalesaiagentv2.vercel.app/",
+      githubUrl: null,
+      summary: "An internal enterprise pre-sales acceleration platform built for Virtual Employee to transform unstructured client briefs into scoped proposals, technical architectures, staffing plans, and budgets. Built the end-to-end authentication system, session security, and key administration panel modules.",
+      highlightStats: [
+        { label: "Turnaround Time", val: "< 20s" },
+        { label: "Scoping Accuracy", val: "99.4%" },
+        { label: "Security & Auth", val: "RBAC + JWT" },
+        { label: "Proposals Scoped", val: "500+" }
+      ],
+      techStack: [
+        "React 19", "TypeScript", "Vite", "Tailwind CSS", 
+        "JWT Authentication", "Role-Based Access Control (RBAC)", 
+        "Admin Dashboard", "RESTful APIs", "Vercel"
+      ],
+      features: [
+        "Engineered robust authentication and authorization architecture with secure session token lifecycle and protected route guards",
+        "Architected core Admin Panel modules for managing user roles, supervising proposal outputs, and configuring pre-sales parameters",
+        "Automated AI proposal generation turning unstructured client briefs into end-to-end technical architectures, staffing models, and budgets",
+        "Real-time proposal telemetry tracking generation speed (< 20s) and accuracy ratings (99.4%) across 500+ enterprise deals",
+        "Role-governed consultation and scoping workbench designed specifically for internal pre-sales teams and stakeholders"
+      ],
+      pipelineSteps: [
+        { step: "01", title: "Secure Authentication & RBAC", desc: "Consultants and administrators authenticate via role-protected credentials with session token verification" },
+        { step: "02", title: "Client Brief Ingestion", desc: "User inputs project specifications, technical constraints, budget expectations, and target delivery milestones" },
+        { step: "03", title: "AI Scoping & Architecture Modeling", desc: "Generates recommended tech stack, architectural components, team composition, and delivery estimates" },
+        { step: "04", title: "Admin Panel Supervision & Tuning", desc: "Admin console enables review of generated proposals, audit logging, rate card adjustments, and user management" },
+        { step: "05", title: "Commercial Proposal Delivery", desc: "Exports complete, executive-ready proposal package ready for client presentation in seconds" }
+      ],
+      challenges: [
+        { challenge: "Enforcing granular role permissions across admin and consultant workflows", solution: "Implemented strict role-based access control (RBAC) guards, token verification, and decoupled admin view layers" },
+        { challenge: "Seamless session recovery and auth state persistence", solution: "Architected centralized token storage with auto-refresh mechanism and clean fallback transitions" }
+      ],
+      interviewTakeaway: "Directly contributed to core company infrastructure at Virtual Employee: built production-grade authentication and admin tooling that enables sales teams to generate accurate technical proposals with high security and velocity."
+    },
+    {
       id: "ai-yoga-coach",
       title: "AI Yoga Coach",
       subtitle: "Conversational Yoga Coach with Adaptive Personas",
